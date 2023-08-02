@@ -1,21 +1,31 @@
-// [Template no Kotlin Playground](https://pl.kotl.in/WcteahpyN)
+enum class Nivel { BASICO, INTERMEDIARIO, AVANCADO }
 
-enum class Nivel { BASICO, INTERMEDIARIO, DIFICIL }
+class Usuario(val nome: String, val nivel: Nivel)
 
-class Usuario
-
-data class ConteudoEducacional(var nome: String, val duracao: Int = 60)
+data class ConteudoEducacional(var nome: String, val duracao: Int = 25) // Duração utilizando a técnica Pomodoro 25/5
 
 data class Formacao(val nome: String, var conteudos: List<ConteudoEducacional>) {
 
     val inscritos = mutableListOf<Usuario>()
-    
+
     fun matricular(usuario: Usuario) {
-        TODO("Utilize o parâmetro $usuario para simular uma matrícula (usar a lista de $inscritos).")
+        inscritos.add(usuario)
     }
 }
 
 fun main() {
-    TODO("Analise as classes modeladas para este domínio de aplicação e pense em formas de evoluí-las.")
-    TODO("Simule alguns cenários de teste. Para isso, crie alguns objetos usando as classes em questão.")
+    println("Digite o nome da formação:")
+    val nomeFormacao = readLine() ?: ""
+
+    val formacao = Formacao(nomeFormacao, emptyList())
+
+    val usuario1 = Usuario("João", Nivel.BASICO)
+    val usuario2 = Usuario("Maria", Nivel.AVANCADO)
+
+    formacao.matricular(usuario1)
+    formacao.matricular(usuario2)
+
+    println("Formação: ${formacao.nome}")
+    println("Conteúdos: ${formacao.conteudos}")
+    println("Inscritos: ${formacao.inscritos}")
 }
